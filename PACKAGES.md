@@ -6,6 +6,8 @@
 * tmux
 * git
 * pass
+* mc
+* ranger
 
 ## Personal
 * pianobar
