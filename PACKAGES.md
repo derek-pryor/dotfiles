@@ -19,6 +19,9 @@
 * xmobar
 
 ## Development
+* git
+* golang
+* python3 / pip3
 * docker
 * podman
     - `add-apt-repository ppa:projectatomic/ppa`
