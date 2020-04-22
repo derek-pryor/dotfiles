@@ -8,6 +8,7 @@
 * pass
 * mc
 * ranger
+* xclip
 
 ## Personal
 * pianobar
