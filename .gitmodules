@@ -16,3 +16,12 @@
 [submodule "vim/pack/dist/start/vim-airline-themes"]
 	path = vim/pack/dist/start/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
+[submodule "tmux/plugins/tmux-resurrect"]
+	path = tmux/plugins/tmux-resurrect
+	url = https://github.com/tmux-plugins/tmux-resurrect
+[submodule "tmux/plugins/tmux-continuum"]
+	path = tmux/plugins/tmux-continuum
+	url = https://github.com/tmux-plugins/tmux-continuum
+[submodule "vim/pack/tpope/start/vim-obsession"]
+	path = vim/pack/tpope/start/vim-obsession
+	url = https://github.com/tpope/vim-obsession
