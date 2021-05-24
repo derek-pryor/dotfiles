@@ -1,2 +1,2 @@
 #!/bin/bash
-grep -E 'NOTE' -r -n --exclude-dir={node_modules,.git,lib} --exclude={"*bundle.js","*.map","*.min.js","*.csv","go.mod","go.sum"} . 2> /dev/null
+grep -E 'NOTE' -r -n -I --exclude-dir={node_modules,.git,lib} --exclude={"*bundle.js","*.map","*.min.js","*.csv","go.mod","go.sum"} . 2> /dev/null
