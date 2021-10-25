@@ -9,6 +9,10 @@
 * mc
 * ranger
 * xclip
+* gnome-control-center
+* pavucontrol
+* nmcli
+* bluetoothctl
 
 ## Personal
 * pianobar

@@ -14,7 +14,7 @@ main = do
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 50
                         }
-        , terminal = "xterm -fs 'Monospace' -fs 12"
+        , terminal = "/usr/bin/st -f 'Monospace:size=12'"
         } `additionalKeys`
         [ ((mod4Mask .|. shiftMask, xK_z), spawn "gnome-screensaver-command --lock")
         ]
