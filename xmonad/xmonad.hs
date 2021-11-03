@@ -14,7 +14,17 @@ main = do
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 50
                         }
-        , terminal = "/usr/bin/st -f 'Monospace:size=12'"
+        , terminal = "/usr/bin/st -f 'Hack:size=12'"
+        , modMask = modMask
         } `additionalKeys`
-        [ ((mod4Mask .|. shiftMask, xK_z), spawn "gnome-screensaver-command --lock")
+        [ ((modMask, xK_slash), spawn "xsecurelock")
+
+         -- Media Keys
+         ,((0, 0x1008ff94), spawn "bluetooth-toggle") -- XF86Bluetooth doesn't have a named var
+
+         -- Keys to get an OTP code
+         ,((modMask .|. shiftMask, xK_o), spawn "pass-osd otp -c 2fa/redhat.com")
+         ,((modMask, xK_o), spawn "pass-osd otp 2fa/redhat.com")
         ]
+    where
+        modMask = mod1Mask -- Left Alt (Win Key is mod4Mask)

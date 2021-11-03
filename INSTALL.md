@@ -1,5 +1,8 @@
 # Install instructions
 
+## Clone Dotfiles
+This dotfiles repository makes use of submodules to link to other packages. Either clone this repository using `git clone --recurse-submodules` or clone as normal and run `git submodule update --init`
+
 ## Vim 8+
 
 * `ln -s /path/to/dotfiles/vim ~/.vim`
