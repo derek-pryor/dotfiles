@@ -1,0 +1,71 @@
+#!/bin/bash
+
+mgmt() {
+    pushd ~/notes/
+    SESSION="mgmt"
+    tmux has-session -t $SESSION 2> /dev/null
+
+    if [ $? != 0 ]; then
+	tmux new-session -d -t $SESSION
+
+	WINDOW=0
+	tmux rename-window -t $SESSION:$WINDOW 'notes'
+	tmux-reset-history $SESSION $WINDOW
+	tmux send-keys -t $SESSION:$WINDOW 'ls' C-m
+	tmux send-keys -t $SESSION:$WINDOW '~/.local/bin/notes.sh' C-m
+
+	WINDOW=1
+	tmux new-window -t $SESSION:$WINDOW -n 'jira'
+	tmux-reset-history $SESSION $WINDOW
+	tmux send-keys -t $SESSION:$WINDOW 'jira issue list -a$(jira me)' C-m
+    fi
+    popd
+}
+
+project() {
+    pushd $1
+    SESSION=$2
+    tmux has-session -t $SESSION 2>/dev/null
+
+    if [ $? != 0 ] ; then
+	tmux new-session -d -t $SESSION
+
+	WINDOW=0
+	tmux rename-window -t $SESSION:$WINDOW 'vim'
+	if [ -f "Session.vim" ] ; then
+	# Load the existing session file
+	tmux send-keys -t $SESSION:$WINDOW 'vim -S Session.vim' C-m
+	else
+	# Start a new session file
+	tmux send-keys -t $SESSION:$WINDOW 'vim -c ":Obsession"' C-m
+	fi
+
+	WINDOW=1
+	tmux new-window -t $SESSION:$WINDOW -n 'git'
+	tmux-reset-history $SESSION $WINDOW
+	tmux send-keys -t $SESSION:$WINDOW 'git status' C-m
+    fi
+    popd
+}
+
+tmux-reset-history() {
+    SESSION=$1
+    WINDOW=$2
+
+    # Set a new history file for this specific window
+    tmux send-keys -t $SESSION:$WINDOW "HISTFILE=~/.local/state/bash/${SESSION}-${WINDOW}.history" C-m
+
+    # Force bash to start using the new/existing file by reading its contents
+    tmux send-keys -t $SESSION:$WINDOW 'history -r' C-m
+}
+
+mkdir ~/.local/state/bash/
+
+tmux start-server
+
+mgmt
+
+project ~/repos/credential-manager "cred-mgr"
+project ~/repos/project-spec "proj-spec"
+project ~/repos/workbench-cli "wb-cli"
+project ~/repos/workbench-service "wb-svc"

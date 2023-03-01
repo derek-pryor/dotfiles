@@ -22,3 +22,8 @@ On starting vim run `:Obsession` to start session saving
 
 * `ln -s /path/to/dotfiles/tmux ~/.tmux`
 * `ln -s /path/to/dotfiles/tmux/tmux.conf ~/.tmux.conf`
+
+## Git
+
+* `ln -s /path/to/dotfiles/git/gitignore ~/.gitignore`
+* `git config --global core.excludesFile '~/.gitignore'`

@@ -1,0 +1,28 @@
+#!/bin/bash
+
+CURDIR=${PWD##*/}
+CURDIR=${CURDIR:-/}
+SESSION=${1:-${CURDIR}}
+
+# TODO check to see if the session already exists
+tmux has-session -t $SESSION 2>/dev/null
+
+if [ $? != 0 ] ; then
+    tmux new-session -d -t $SESSION
+
+    WINDOW=0
+    tmux rename-window -t $SESSION:$WINDOW 'vim'
+    if [ -f "Session.vim" ] ; then
+    # Load the existing session file
+    tmux send-keys -t $SESSION:$WINDOW 'vim -S Session.vim' C-m
+    else
+    # Start a new session file
+    tmux send-keys -t $SESSION:$WINDOW 'vim -c ":Obsession"' C-m
+    fi
+
+    WINDOW=1
+    tmux new-window -t $SESSION:$WINDOW -n 'git'
+    tmux send-keys -t $SESSION:$WINDOW 'git status' C-m
+fi
+
+tmux attach-session -t $SESSION
