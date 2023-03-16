@@ -1,0 +1,9 @@
+[add]
+auto_creation_date = 1
+
+[topydo]
+archive_filename = /home/dpryor/.todo/done.txt
+filename = /home/dpryor/.todo/todo.txt
+
+[colorscheme]
+focus_background_color = light-blue

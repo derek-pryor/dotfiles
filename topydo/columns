@@ -1,0 +1,17 @@
+[Current]
+title = Current
+sortexpr = desc:importance
+groupexpr = project
+show_all = 0
+
+[Due]
+title = Due
+filterexpr = due:today
+sortexpr = desc:due
+show_all = 1
+
+[Overdue]
+title = Overdue
+filterexpr = due:<today
+sortexpr = desc:due
+show_all = 1

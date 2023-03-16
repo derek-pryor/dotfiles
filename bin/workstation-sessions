@@ -9,12 +9,17 @@ mgmt() {
 	tmux new-session -d -t $SESSION
 
 	WINDOW=0
-	tmux rename-window -t $SESSION:$WINDOW 'notes'
+	tmux rename-window -t $SESSION:$WINDOW 'todos'
+	tmux-reset-history $SESSION $WINDOW
+	tmux send-keys -t $SESSION:$WINDOW 'topydo columns' C-m
+
+	WINDOW=1
+	tmux new-window -t $SESSION:$WINDOW 'notes'
 	tmux-reset-history $SESSION $WINDOW
 	tmux send-keys -t $SESSION:$WINDOW 'ls' C-m
 	tmux send-keys -t $SESSION:$WINDOW '~/.local/bin/notes.sh' C-m
 
-	WINDOW=1
+	WINDOW=2
 	tmux new-window -t $SESSION:$WINDOW -n 'jira'
 	tmux-reset-history $SESSION $WINDOW
 	tmux send-keys -t $SESSION:$WINDOW 'jira issue list -a$(jira me)' C-m

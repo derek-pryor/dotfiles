@@ -27,3 +27,8 @@ On starting vim run `:Obsession` to start session saving
 
 * `ln -s /path/to/dotfiles/git/gitignore ~/.gitignore`
 * `git config --global core.excludesFile '~/.gitignore'`
+
+## Topydo
+
+* `pip3 install topydo[columns]`
+* `ln -s /path/to/dotfiles/topydo ~/.config/topydo`
