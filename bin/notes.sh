@@ -133,7 +133,7 @@ case "$0" in
 		getNote "${@}"
 		fileName="${today}-${note}.md"
 
-		${EDITOR:-vim} $fileName
+		exec ${EDITOR:-vim} $fileName
 		;;
 	    view)
 		getNote "${@}"
