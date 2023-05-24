@@ -25,3 +25,6 @@
 [submodule "vim/pack/tpope/start/vim-obsession"]
 	path = vim/pack/tpope/start/vim-obsession
 	url = https://github.com/tpope/vim-obsession
+[submodule "vim/pack/martinda/start/Jenkinsfile-vim-syntax"]
+	path = vim/pack/martinda/start/Jenkinsfile-vim-syntax
+	url = https://github.com/martinda/Jenkinsfile-vim-syntax.git
