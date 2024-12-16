@@ -5,7 +5,8 @@ mgmt() {
     SESSION="mgmt"
     tmux has-session -t $SESSION 2> /dev/null
 
-    if [ $? != 0 ]; then
+    if [ $? -ne 0 ]; then
+	echo "Creating session $SESSION"
 	tmux new-session -d -t $SESSION
 
 	WINDOW=0
@@ -16,13 +17,14 @@ mgmt() {
 	WINDOW=1
 	tmux new-window -t $SESSION:$WINDOW 'notes'
 	tmux-reset-history $SESSION $WINDOW
-	tmux send-keys -t $SESSION:$WINDOW 'ls' C-m
-	tmux send-keys -t $SESSION:$WINDOW '~/.local/bin/notes.sh' C-m
+	#tmux send-keys -t $SESSION:$WINDOW 'ls' C-m
+	tmux send-keys -t $SESSION:$WINDOW 'notes.sh ls' C-m
 
 	WINDOW=2
 	tmux new-window -t $SESSION:$WINDOW -n 'jira'
 	tmux-reset-history $SESSION $WINDOW
-	tmux send-keys -t $SESSION:$WINDOW 'jira issue list -a$(jira me)' C-m
+	#tmux send-keys -t $SESSION:$WINDOW 'jira issue list -a$(jira me)' C-m
+	tmux send-keys -t $SESSION:$WINDOW 'jira.sh mine' C-m
     fi
     popd
 }
@@ -32,7 +34,8 @@ project() {
     SESSION=$2
     tmux has-session -t $SESSION 2>/dev/null
 
-    if [ $? != 0 ] ; then
+    if [ $? -ne 0 ] ; then
+	echo "Creating session $SESSION"
 	tmux new-session -d -t $SESSION
 
 	WINDOW=0
@@ -64,13 +67,15 @@ tmux-reset-history() {
     tmux send-keys -t $SESSION:$WINDOW 'history -r' C-m
 }
 
-mkdir ~/.local/state/bash/
+mkdir -p ~/.local/state/bash/
 
 tmux start-server
 
 mgmt
 
+project ~/repos/base-environment "base-env"
 project ~/repos/credential-manager "cred-mgr"
-project ~/repos/project-spec "proj-spec"
 project ~/repos/workbench-cli "wb-cli"
 project ~/repos/workbench-service "wb-svc"
+project ~/repos/project-spec "proj-spec"
+project ~/repos/project-versioning "proj-ver"

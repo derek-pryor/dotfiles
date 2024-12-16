@@ -1,2 +1,2 @@
 #!/bin/bash
-grep -E 'TODO|XXX|\?\?\?' -r -n -I --exclude-dir={node_modules,.git,lib} --exclude={"*bundle.js","*.map","*.min.js","*.csv","go.mod","go.sum"} . 2> /dev/null
+grep -E 'TODO|XXX|\?\?\?' -r -n -I --exclude-dir={node_modules,.git,lib} --exclude={"*bundle.js","*.map","*.min.js","*.csv","go.mod","go.sum", "\*.json"} . 2> /dev/null

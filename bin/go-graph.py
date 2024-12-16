@@ -4,6 +4,8 @@ import argparse
 import sys
 import re
 import fnmatch
+import subprocess
+import io
 
 class Dependency(object):
     def __init__(self, name_ver):
@@ -141,14 +143,15 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.file is None:
-        result = subprocess.run(["go", "mod", "graph"], capture_output=True)
+        result = subprocess.run(["go", "mod", "graph"], capture_output=True, text=True)
         if result.returncode != 0:
             print("Problem running `go mod graph`")
             print(f"Stdout: {result.stdout}")
             print(f"Stderr: {result.stderr}")
             sys.exit(result.returncode)
 
-        pass
+        buf = io.StringIO(result.stdout)
+        deps = parse_input(buf)
     elif args.file == "-":
         deps = parse_input(sys.stdin)
     else:
